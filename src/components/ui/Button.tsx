@@ -27,7 +27,6 @@ const Button = ({ children, variant = 'primary', className, disabled, ...props }
       : 'bg-transparent! text-indigo-700! hover:bg-indigo-100!',
   };
 
-  console.log('first', disabled)
   const combined = twMerge(baseClasses, variants[variant], disabled && disableClasses, className);
 
   return (

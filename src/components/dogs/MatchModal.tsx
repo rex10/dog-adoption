@@ -22,7 +22,6 @@ export default function MatchModal() {
   }, [setMatchedDog]);
 
   if (!matchedDog) return null;
-  console.log(darkMode, 'darkMode')
   return (
     <div className={`fixed inset-0 ${darkMode ? 'bg-gray-900/50' : 'bg-gray-500/50'} flex items-center justify-center p-4`}>
       <div
