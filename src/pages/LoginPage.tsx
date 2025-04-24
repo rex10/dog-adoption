@@ -18,7 +18,7 @@ export default function LoginPage() {
   return (
     <>
       <Header />
-      <div className={`min-h-screen min-w-screen ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50'} flex flex-col justify-center py-12 sm:px-6 lg:px-8`}>
+      <div className={`min-h-screen w-full ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50'} flex flex-col justify-center py-12 sm:px-6 lg:px-8`}>
         <ErrorMessage message={error} />
         <LoginForm onSubmit={login} />
       </div>

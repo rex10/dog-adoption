@@ -104,7 +104,7 @@ export default function SearchPage() {
 
 
   return (
-    <div className={`min-h-screen min-w-8xl ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50'}`}>
+    <div className={`min-h-screen w-full ${darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-50'}`}>
       <Header />
       <div className="px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">

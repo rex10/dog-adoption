@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './stores/auth.store';
 import Loader from './components/ui/Loader';
@@ -8,15 +7,9 @@ import ErrorBoundary from './components/ui/ErrorBoundary';
 import { ThemeProvider } from './contexts/ThemeProvider';
 
 export default function App() {
-  const { isAuthenticated, isLoading, checkAuth } = useAuthStore();
+  const { isAuthenticated, isLoading } = useAuthStore();
 
-  useEffect(() => {
-    if (location.pathname === "/search")
-      checkAuth();
-  }, [checkAuth]);
-
-  if (isLoading && location.pathname === '/search') {
-
+  if (isLoading) {
     return (
       <div className='min-w-screen min-h-screen'>
         <Loader />;

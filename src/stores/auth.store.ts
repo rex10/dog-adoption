@@ -4,41 +4,26 @@ import api from '../utils/api';
 interface AuthState {
     isAuthenticated: boolean;
     isLoading: boolean;
-    checkAuth: () => Promise<void>;
     login: (name: string, email: string) => Promise<void>;
     logout: () => Promise<void>;
     error: string | null;
     setError: (error: string | null) => void;
 }
 
+const LOCAL_STORAGE_KEY = 'isAuthenticated';
+
 export const useAuthStore = create<AuthState>((set) => ({
-    isAuthenticated: false,
+    isAuthenticated: localStorage.getItem(LOCAL_STORAGE_KEY) === 'true',
     isLoading: false,
     error: null,
     setError: (error) => set({ error }),
-
-    checkAuth: async () => {
-        set({ isLoading: true })
-        try {
-            await api.get('/dogs/breeds', {
-                _isAuthCheck: true
-            });
-            set({ isAuthenticated: true, isLoading: false });
-        } catch (error) {
-            set({
-                isAuthenticated: false, isLoading: false,
-                error: error instanceof Error ? error.message : 'Please Login'
-            });
-        } finally {
-            set({ isLoading: false })
-        }
-    },
 
     login: async (name, email) => {
         set({ isLoading: true, error: null });
         try {
             set({ isLoading: true, error: null });
             await api.post('/auth/login', { name, email });
+            localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
             set({ isAuthenticated: true, isLoading: false });
         } catch (error) {
             set({
@@ -55,7 +40,14 @@ export const useAuthStore = create<AuthState>((set) => ({
         set({ isLoading: true });
         try {
             await api.post('/auth/logout');
+        }catch (error) {
+            set({
+                isAuthenticated: false,
+                isLoading: false,
+                error: error instanceof Error ? error.message : 'Logout failed'
+            });
         } finally {
+            localStorage.removeItem(LOCAL_STORAGE_KEY);
             set({ isAuthenticated: false, isLoading: false });
         }
     }
