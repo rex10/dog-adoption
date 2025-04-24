@@ -10,7 +10,7 @@ const Header = () => {
     return (
         <header className={`${darkMode ? 'bg-gray-800' : 'bg-indigo-300'} text-white shadow-lg`}>
             <div className="max-w-8xl mx-auto px-4 py-4 flex items-center justify-between">
-                <h1 className="text-lg sm:text-2xl font-bold">Fetch Dog Adoption</h1>
+                <h1 className="text-5xl max-sm:text-3xl font-bold">Fetch Dog Adoption</h1>
 
                 <div className="flex items-center gap-4">
                     <button
