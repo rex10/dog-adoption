@@ -1,4 +1,4 @@
-# Fetch Dog Adoption App 🐶
+# Dog Adoption App 🐶
 
 A React + Vite + TypeScript application to find your perfect dog match!
 
