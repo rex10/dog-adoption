@@ -4,7 +4,7 @@ import LoginForm from '../components/auth/LoginForm';
 import ErrorMessage from '../components/ui/ErrorMessage';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/ui/Header';
-import { useTheme } from '../contexts/ThemeContext';
+import { useTheme } from '../contexts/useTheme';
 
 export default function LoginPage() {
   const { isAuthenticated, login, error } = useAuthStore();

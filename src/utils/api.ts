@@ -1,8 +1,14 @@
 import axios from "axios";
 
+declare module 'axios' {
+    interface AxiosRequestConfig {
+      _isAuthCheck?: boolean;
+    }
+  }
+  
 
 const api = axios.create({
-    baseURL: 'https://frontend-take-home-service.fetch.com',
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     withCredentials: true,
 });
 

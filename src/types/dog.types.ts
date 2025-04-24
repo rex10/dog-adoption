@@ -50,9 +50,9 @@ export interface Dog {
     zipCodes?: string[];
     ageMin?: number;
     ageMax?: number;
-    sort?: string;
-    from?: number;
-    size?: number;
+    sort: string;
+    from: number;
+    size: number;
   }
   
   export interface Pagination {

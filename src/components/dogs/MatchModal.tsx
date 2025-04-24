@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useDogsStore } from '../../stores/dog.store';
-import { useTheme } from '../../contexts/ThemeContext';
 import Button from '../ui/Button';
+import { useTheme } from '../../contexts/useTheme';
 
 
 export default function MatchModal() {

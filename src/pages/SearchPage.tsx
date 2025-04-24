@@ -5,13 +5,13 @@ import DogsGrid from '../components/dogs/DogsGrid';
 import Pagination from '../components/dogs/Pagination';
 import MatchModal from '../components/dogs/MatchModal';
 import { useDogsStore, } from '../stores/dog.store';
-import { Dog, LocationSearchParams, SearchParams } from '../types/dog.types';
+import { Dog, Location, LocationSearchParams, SearchParams } from '../types/dog.types';
 import { getBreeds, getDogs, matchDog, searchDogs } from '../services/dog';
 import { getLocations, searchLocations } from '../services/location';
 import LocationFilter from '../components/dogs/LocationFilter';
 import Header from '../components/ui/Header';
-import { useTheme } from '../contexts/ThemeContext';
 import Button from '../components/ui/Button';
+import { useTheme } from '../contexts/useTheme';
 
 const DEFAULT_SEARCH_PARAMS: SearchParams = {
   sort: 'breed:asc',
@@ -26,7 +26,7 @@ export default function SearchPage() {
   const [searchParams, setSearchParams] = useState<SearchParams>(DEFAULT_SEARCH_PARAMS);
   const [loading, setLoading] = useState(false);
   const { favorites, setMatchedDog } = useDogsStore();
-  const [locations, setLocations] = useState<LocationSearchParams[]>([]);
+  const [locations, setLocations] = useState<Location[]>([]);
   const { darkMode } = useTheme();
 
 
@@ -62,7 +62,7 @@ export default function SearchPage() {
 
     setSearchParams(prev => ({
       ...prev,
-      from: newPage * prev?.size
+      from: newPage * (prev?.size || DEFAULT_SEARCH_PARAMS.size)
     }));
   };
 
@@ -75,20 +75,30 @@ export default function SearchPage() {
 
   const handleLocationSearch = async (locationFilter: LocationSearchParams) => {
     try {
+      setLoading(true)
       if (Object.keys(locationFilter).length > 0) {
         const { results } = await searchLocations(locationFilter);
-        setLocations(results);
+        
+        if(results.length === 0){
+          throw new Error("No locations found matching your criteria");
+        }
 
+        setLocations(results);
+        
         setSearchParams(prev => ({
           ...prev,
           zipCodes: results.map(l => l.zip_code),
-          from: 1
+          from: 0
         }));
       } else {
         setSearchParams(DEFAULT_SEARCH_PARAMS);
       }
     } catch (error) {
       console.error('Location search failed:', error);
+      setLocations([]);
+      setSearchParams(DEFAULT_SEARCH_PARAMS);
+    } finally {
+      setLoading(false)
     }
   };
 

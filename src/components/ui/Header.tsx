@@ -1,7 +1,7 @@
-import { useTheme } from '../../contexts/ThemeContext';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import { useAuthStore } from '../../stores/auth.store';
 import Button from './Button';
+import { useTheme } from '../../contexts/useTheme';
 
 const Header = () => {
     const { isAuthenticated, logout } = useAuthStore()

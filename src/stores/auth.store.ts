@@ -26,7 +26,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         } catch (error) {
             set({
                 isAuthenticated: false, isLoading: false,
-                // error: error instanceof Error ? error.message : 'Please Login'
+                error: error instanceof Error ? error.message : 'Please Login'
             });
         }
     },

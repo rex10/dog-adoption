@@ -1,4 +1,4 @@
-import { useTheme } from "../../contexts/ThemeContext";
+import { useTheme } from "../../contexts/useTheme";
 import Button from "../ui/Button";
 
 interface PaginationProps {

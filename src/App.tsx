@@ -5,7 +5,7 @@ import Loader from './components/ui/Loader';
 import LoginPage from './pages/LoginPage';
 import SearchPage from './pages/SearchPage';
 import ErrorBoundary from './components/ui/ErrorBoundary';
-import { ThemeProvider } from './contexts/ThemeContext';
+import { ThemeProvider } from './contexts/ThemeProvider';
 
 export default function App() {
   const { isAuthenticated, isLoading, checkAuth } = useAuthStore();
