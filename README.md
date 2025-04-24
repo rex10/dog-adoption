@@ -23,3 +23,20 @@ A React + Vite + TypeScript application to find your perfect dog match!
 1. Clone the repo:
 ```bash
 git clone https://github.com/rex10/dog-adoption.git
+
+```
+
+2. Create .env file in root directory
+```
+.env
+VITE_API_BASE_URL = "https://frontend-take-home-service.fetch.com"
+
+
+Add above line to .env file.
+```
+3. Run Application
+```
+npm install
+npm run dev
+
+```
