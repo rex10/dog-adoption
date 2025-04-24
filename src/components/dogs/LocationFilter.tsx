@@ -18,6 +18,8 @@ export default function LocationFilter({ onSearch }: LocationFilterProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const hasValues = Object.values(bbox).some(value => value == "");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -124,7 +126,7 @@ export default function LocationFilter({ onSearch }: LocationFilterProps) {
         <Button
           variant='secondary'
           type="submit"
-          disabled={loading}
+          disabled={loading || city === '' && states === '' && hasValues}
           className={`w-full py-2 px-4 rounded-lg transition-colors ${loading && 'bg-indigo-400 cursor-not-allowed'
             } text-white font-medium`}
         >

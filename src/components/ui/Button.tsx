@@ -10,7 +10,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const baseClasses =
   'font-medium py-2 px-4 rounded-md transition-colors duration-200 focus:outline-none';
 
-const Button = ({ children, variant = 'primary', className, ...props }: ButtonProps) => {
+const disableClasses = "opacity-50! cursor-not-allowed! hover:bg-inherit!! border-0! ";
+
+const Button = ({ children, variant = 'primary', className, disabled, ...props }: ButtonProps) => {
   const { darkMode } = useTheme();
 
   const variants = {
@@ -25,7 +27,8 @@ const Button = ({ children, variant = 'primary', className, ...props }: ButtonPr
       : 'bg-transparent! text-indigo-700! hover:bg-indigo-100!',
   };
 
-  const combined = twMerge(baseClasses, variants[variant], className);
+  console.log('first', disabled)
+  const combined = twMerge(baseClasses, variants[variant], disabled && disableClasses, className);
 
   return (
     <button className={combined} {...props}>

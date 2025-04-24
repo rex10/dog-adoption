@@ -13,11 +13,12 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>((set) => ({
     isAuthenticated: false,
-    isLoading: true,
+    isLoading: false,
     error: null,
     setError: (error) => set({ error }),
 
     checkAuth: async () => {
+        set({ isLoading: true })
         try {
             await api.get('/dogs/breeds', {
                 _isAuthCheck: true
@@ -28,10 +29,13 @@ export const useAuthStore = create<AuthState>((set) => ({
                 isAuthenticated: false, isLoading: false,
                 error: error instanceof Error ? error.message : 'Please Login'
             });
+        } finally {
+            set({ isLoading: false })
         }
     },
 
     login: async (name, email) => {
+        set({ isLoading: true, error: null });
         try {
             set({ isLoading: true, error: null });
             await api.post('/auth/login', { name, email });
@@ -42,10 +46,13 @@ export const useAuthStore = create<AuthState>((set) => ({
                 isLoading: false,
                 error: error instanceof Error ? error.message : 'Login failed'
             });
+        } finally {
+            set({ isLoading: false })
         }
     },
 
     logout: async () => {
+        set({ isLoading: true });
         try {
             await api.post('/auth/logout');
         } finally {

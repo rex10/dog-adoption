@@ -11,10 +11,11 @@ export default function App() {
   const { isAuthenticated, isLoading, checkAuth } = useAuthStore();
 
   useEffect(() => {
-    checkAuth();
+    if (location.pathname === "/search")
+      checkAuth();
   }, [checkAuth]);
 
-  if (isLoading) {
+  if (isLoading && location.pathname === '/search') {
 
     return (
       <div className='min-w-screen min-h-screen'>
